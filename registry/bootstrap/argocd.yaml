@@ -10,7 +10,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/jarededwards/goop
+    repoURL: https://github.com/jarededwards/goop.git
     path: registry/bootstrap/argocd
     targetRevision: HEAD
   destination:

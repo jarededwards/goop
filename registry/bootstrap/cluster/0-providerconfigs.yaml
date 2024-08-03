@@ -1,21 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mgmt-cloudflare-origin-issuer-crd
+  name: mgmt-terraform-providerconfig
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: '50'
+    argocd.argoproj.io/sync-wave: '0'
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    repoURL: https://github.com/cloudflare/origin-ca-issuer
-    path: deploy/crds
-    targetRevision: v0.6.1
+    repoURL: https://github.com/jarededwards/goop.git
+    path: registry/bootstrap/cluster/providerconfig
+    targetRevision: HEAD
   destination:
-    name: mgmt
-    namespace: cert-manager
+    name: in-cluster
+    namespace: argocd
   syncPolicy:
     automated:
       prune: true

@@ -11,7 +11,7 @@
 
 ### clone the `goop` git repository
 ```sh
-git clone https://github.com/jarededwards/goop
+git clone .git
 cd goop
 ```
 

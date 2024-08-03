@@ -7,10 +7,10 @@ spec:
     name: mgmt
   forProvider:
     source: Remote
-    module: git::https://github.com/jarededwards/goop.git//2024-austin/terraform/modules/cluster-cloudflare?ref=cloudflare
+    module: git::https://github.com/jarededwards/goop.git//terraform/modules/cluster?ref=main
     vars:
     - key: cluster_name
-      value: mgmt
+      value: "mgmt"
     - key: node_count
       value: "3"
     - key: node_type

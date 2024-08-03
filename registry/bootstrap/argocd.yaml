@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/jarededwards/goop
-    path: 2024-austin/bootstrap/argocd
+    path: registry/bootstrap/argocd
     targetRevision: HEAD
   destination:
     name: in-cluster

@@ -10,7 +10,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/kubefirst/navigate
+    repoURL: https://github.com/jarededwards/goop
     path: 2024-austin/bootstrap/crossplane/crossplane-system
     targetRevision: HEAD
   destination:

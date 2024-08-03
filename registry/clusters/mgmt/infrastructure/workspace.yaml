@@ -7,7 +7,7 @@ spec:
     name: mgmt
   forProvider:
     source: Remote
-    module: git::https://github.com/kubefirst/navigate.git//2024-austin/terraform/modules/cluster-cloudflare?ref=cloudflare
+    module: git::https://github.com/jarededwards/goop.git//2024-austin/terraform/modules/cluster-cloudflare?ref=cloudflare
     vars:
     - key: cluster_name
       value: mgmt

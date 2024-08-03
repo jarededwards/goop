@@ -25,6 +25,13 @@ k3d cluster create goop --agents "1" --agents-memory "4096m" \
 ### add your `CIVO_TOKEN`, `CLOUDFLARE_API_TOKEN`,  and `CLOUDFLARE_ORIGIN_CA_KEY` for provisioning cloud infrastructure and managing DNS
 The `CIVO_TOKEN` will be used by the crossplane terraform provider to allow for provisioning of CIVO cloud infrastructure as well as for external-dns to create and adjust DNS records in your CIVO cloud account. The `CLOUDFLARE_API_TOKEN` will be used to manage DNS records in your Cloudflare zone and `CLOUDFLARE_ORIGIN_CA_KEY` will be used by the Cloudflare Origin CA Issuer controller to get certificates for TLS communication of the metaphor service.
 ```sh
+
+# check envs
+echo $CIVO_TOKEN
+echo $CIVO_TOKEN$$
+echo $CLOUDFLARE_API_TOKEN
+echo $CLOUDFLARE_ORIGIN_CA_KEY
+
 kubectl -n crossplane-system create secret generic crossplane-secrets \
   --from-literal=CIVO_TOKEN=$CIVO_TOKEN \
   --from-literal=TF_VAR_civo_token=$CIVO_TOKEN \

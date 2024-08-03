@@ -10,8 +10,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/kubefirst/navigate
-    path: 2024-austin/bootstrap
+    repoURL: https://github.com/jarededwards/goop
+    path: registry/bootstrap
     targetRevision: HEAD
   destination:
     name: in-cluster

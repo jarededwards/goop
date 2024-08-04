@@ -28,11 +28,15 @@ The `CIVO_TOKEN` will be used by the crossplane terraform provider to allow for 
 
 # check envs
 echo $CIVO_TOKEN
-echo $CIVO_TOKEN$$
+echo $CIVO_TOKEN
+echo $AWS_ACCESS_KEY_ID
+echo $AWS_SECRET_ACCESS_KEY
 echo $CLOUDFLARE_API_TOKEN
 echo $CLOUDFLARE_ORIGIN_CA_KEY
 
 kubectl -n crossplane-system create secret generic crossplane-secrets \
+  --from-literal=AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+  --from-literal=AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
   --from-literal=CIVO_TOKEN=$CIVO_TOKEN \
   --from-literal=TF_VAR_civo_token=$CIVO_TOKEN \
   --from-literal=TF_VAR_cloudflare_api_token=$CLOUDFLARE_API_TOKEN \

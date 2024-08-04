@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/jarededwards/goop.git
-    path: registry/clusters/clusters/mgmt/components/ingress-nginx
+    path: registry/clusters/mgmt/components/ingress-nginx
     targetRevision: HEAD
   destination:
     name: in-cluster

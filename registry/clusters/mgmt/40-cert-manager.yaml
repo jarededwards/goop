@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/jarededwards/goop.git
-    path: registry/clusters/clusters/mgmt/components/cert-manager
+    path: registry/clusters/mgmt/components/cert-manager
     targetRevision: HEAD
   destination:
     name: in-cluster

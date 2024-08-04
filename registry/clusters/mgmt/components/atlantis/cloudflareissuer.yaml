@@ -14,8 +14,9 @@ spec:
   refreshInterval: 10s
   data:
   - remoteRef:
-      key: cloudflare
+      key: /cloudflare
       property: origin-ca-api-key
+      version: v1
     secretKey: origin-ca-api-key
 ---
 apiVersion: cert-manager.k8s.cloudflare.com/v1

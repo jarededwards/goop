@@ -65,4 +65,6 @@ kubectl apply -f https://raw.githubusercontent.com/jarededwards/goop/main/regist
 ### apply the registry for mgmt to the new remote mgmt cluster argocd
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/jarededwards/goop/main/registry/clusters/mgmt/registry.yaml
+# mgmt cluster context
+pbpaste | kubectl apply -f -
 ```

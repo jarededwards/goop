@@ -3,7 +3,7 @@ kind: Workspace
 metadata:
   name: mgmt-infrastructure
   annotations:
-    crossplane.io/external-name: mgmt-infrastructure
+    crossplane.io/external-name: mgmt-infrastructure # required to import the existing workspace from state
 spec:
   deletionPolicy: Orphan
   providerConfigRef: 

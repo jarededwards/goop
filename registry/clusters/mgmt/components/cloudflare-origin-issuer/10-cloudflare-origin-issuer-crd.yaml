@@ -1,25 +1,24 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vault-wait
+  name: cloudflare-origin-issuer-crd
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: '0'
+    argocd.argoproj.io/sync-wave: "10"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    repoURL: https://github.com/jarededwards/goop.git
-    path: registry/clusters/mgmt/components/argo-workflows/wait
-    targetRevision: HEAD
+    repoURL: https://github.com/cloudflare/origin-ca-issuer
+    path: deploy/crds
+    targetRevision: v0.9.0
   destination:
     name: in-cluster
-    namespace: vault
+    namespace: cert-manager
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-      - Replace=true

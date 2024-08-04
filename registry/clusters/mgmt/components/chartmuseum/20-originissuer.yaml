@@ -1,0 +1,14 @@
+
+apiVersion: cert-manager.k8s.cloudflare.com/v1
+kind: OriginIssuer
+metadata:
+  name: cloudflare-origin-issuer
+  namespace: chartmuseum
+  annotations:
+    argocd.argoproj.io/sync-wave: "20"
+spec:
+  requestType: OriginECC
+  auth:
+    serviceKeyRef:
+      key: origin-ca-api-key
+      name: cloudflare-secrets

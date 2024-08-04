@@ -25,7 +25,7 @@ spec:
           secure: false
           extraArgs:
           - --auth-mode=client
-          - --auth-mode=sso
+          # - --auth-mode=sso
           ingress:
             enabled: true
             ingressClassName: nginx
@@ -44,24 +44,24 @@ spec:
               - secretName: argo-tls
                 hosts:
                   - argo.kubesecond.com
-          sso:
-            issuer: https://vault.kubesecond.com/v1/identity/oidc/provider/kubefirst
-            clientId:
-              name: argo-secrets
-              key: client-id
-            clientSecret:
-              name: argo-secrets
-              key: client-secret
-            redirectUrl: https://argo.kubesecond.com/oauth2/callback
-            scopes:
-              - email
-              - openid
-              - groups
-              - user
-              - profile
-            # RBAC Config. >= v2.12
-            rbac:
-              enabled: true
+          # sso:
+          #   issuer: https://vault.kubesecond.com/v1/identity/oidc/provider/kubefirst
+          #   clientId:
+          #     name: argo-secrets
+          #     key: client-id
+          #   clientSecret:
+          #     name: argo-secrets
+          #     key: client-secret
+          #   redirectUrl: https://argo.kubesecond.com/oauth2/callback
+          #   scopes:
+          #     - email
+          #     - openid
+          #     - groups
+          #     - user
+          #     - profile
+          #   # RBAC Config. >= v2.12
+          #   rbac:
+          #     enabled: true
         useDefaultArtifactRepo: true
         useStaticCredentials: true
         artifactRepository:

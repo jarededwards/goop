@@ -6,7 +6,7 @@ metadata:
     argocd.argoproj.io/sync-wave: '0'
 subjects:
   - kind: ServiceAccount
-    name: github-runner
+    name: actions-runner-contoller-actions-runner-controller
     namespace: github-runner
 roleRef:
   kind: ClusterRole

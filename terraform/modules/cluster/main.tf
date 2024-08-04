@@ -104,23 +104,6 @@ resource "kubernetes_secret_v1" "argocd_manager" {
   depends_on = [kubernetes_service_account_v1.argocd_manager]
 }
 
-resource "kubernetes_namespace_v1" "external_dns" {
-  metadata {
-    name = "external-dns"
-  }
-}
-
-resource "kubernetes_secret_v1" "external_dns" {
-  metadata {
-    name      = "external-dns-secrets"
-    namespace = kubernetes_namespace_v1.external_dns.metadata.0.name
-  }
-  data = {
-    token = var.cloudflare_api_token
-  }
-  type = "Opaque"
-}
-
 provider "kubernetes" {
   alias = "local"
 }

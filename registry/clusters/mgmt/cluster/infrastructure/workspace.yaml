@@ -1,0 +1,18 @@
+apiVersion: tf.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: mgmt-infrastructure
+spec:
+  deletionPolicy: Orphan
+  providerConfigRef: 
+    name: mgmt
+  forProvider:
+    source: Remote
+    module: git::https://github.com/jarededwards/goop.git//terraform/modules/cluster?ref=main
+    vars:
+    - key: cluster_name
+      value: "mgmt"
+    - key: node_count
+      value: "5"
+    - key: node_type
+      value: "g4s.kube.medium"

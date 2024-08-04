@@ -13,6 +13,6 @@ spec:
     - key: cluster_name
       value: "mgmt"
     - key: node_count
-      value: "3"
+      value: "5"
     - key: node_type
       value: "g4s.kube.medium"

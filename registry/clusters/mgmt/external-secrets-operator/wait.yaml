@@ -42,7 +42,6 @@ metadata:
   name: wait-external-secrets-cert-controller
   namespace: external-secrets-operator
 spec:
-  ttlSecondsAfterFinished: 300
   template:
     spec:
       containers:
@@ -67,7 +66,6 @@ metadata:
   name: wait-external-secrets
   namespace: external-secrets-operator
 spec:
-  ttlSecondsAfterFinished: 300
   template:
     spec:
       containers:
@@ -92,7 +90,6 @@ metadata:
   name: wait-external-secrets-webhook
   namespace: external-secrets-operator
 spec:
-  ttlSecondsAfterFinished: 300
   template:
     spec:
       containers:

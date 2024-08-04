@@ -24,6 +24,8 @@ kind: OriginIssuer
 metadata:
   name: cloudflare-origin-issuer
   namespace: atlantis
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   requestType: OriginECC
   auth:

@@ -15,8 +15,6 @@ spec:
     helm:
       values: |-
         controller:
-          publishService:
-            enabled: true
           service:
             annotations:
               service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"

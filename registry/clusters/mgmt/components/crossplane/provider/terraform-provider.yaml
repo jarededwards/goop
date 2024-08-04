@@ -2,7 +2,7 @@ apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: '20'
+    argocd.argoproj.io/sync-wave: "20"
   name: crossplane-provider-terraform
 spec:
   controllerConfigRef:

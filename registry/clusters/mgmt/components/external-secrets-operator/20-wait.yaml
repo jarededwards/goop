@@ -38,7 +38,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: '20'
+    argocd.argoproj.io/sync-wave: "20"
   name: wait-external-secrets-cert-controller
   namespace: external-secrets-operator
 spec:
@@ -62,7 +62,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: '20'
+    argocd.argoproj.io/sync-wave: "20"
   name: wait-external-secrets
   namespace: external-secrets-operator
 spec:
@@ -86,7 +86,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: '20'
+    argocd.argoproj.io/sync-wave: "20"
   name: wait-external-secrets-webhook
   namespace: external-secrets-operator
 spec:

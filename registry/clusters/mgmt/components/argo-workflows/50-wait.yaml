@@ -38,7 +38,7 @@
 # kind: Job
 # metadata:
 #   annotations:
-#     argocd.argoproj.io/sync-wave: '20'
+#     argocd.argoproj.io/sync-wave: "20"
 #   name: wait-argo-workflow-controller
 #   namespace: argo
 # spec:
@@ -62,7 +62,7 @@
 # kind: Job
 # metadata:
 #   annotations:
-#     argocd.argoproj.io/sync-wave: '20'
+#     argocd.argoproj.io/sync-wave: "20"
 #   name: wait-argo-server
 #   namespace: argo
 # spec:

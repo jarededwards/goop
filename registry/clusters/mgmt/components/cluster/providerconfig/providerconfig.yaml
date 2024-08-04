@@ -10,7 +10,6 @@ spec:
         backend "s3" {
           bucket   = "k1-state-store-goop"
           key      = "registry/clusters/mgmt/cluster/infrastructure/terraform.tfstate"
-          # key      = "env:/mgmt-infrastructure/registry/clusters/mgmt/cluster/infrastructure/terraform.tfstate"
           endpoint = "https://objectstore.nyc1.civo.com"
 
           region = "nyc1"

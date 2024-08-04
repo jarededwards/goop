@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/jarededwards/goop.git
-    path: registry/clusters/mgmt/cluster/providerconfig
+    path: registry/clusters/mgmt/components/cluster/providerconfig
     targetRevision: HEAD
   destination:
     name: in-cluster

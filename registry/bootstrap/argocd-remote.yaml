@@ -1,21 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: bootstrap
+  name: argocd-remote
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: '100'
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
+    argocd.argoproj.io/sync-wave: '30'
+    argocd.argoproj.io/sync-options: Delete=false
 spec:
   project: default
   source:
     repoURL: https://github.com/jarededwards/goop.git
-    path: registry/bootstrap
+    path: registry/bootstrap/argocd
     targetRevision: HEAD
   destination:
-    name: in-cluster
-    namespace: crossplane-system
+    name: mgmt
+    namespace: argocd
   syncPolicy:
     automated:
       prune: true

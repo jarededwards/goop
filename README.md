@@ -62,7 +62,7 @@ open http://localhost:8888
 kubectl apply -f https://raw.githubusercontent.com/jarededwards/goop/main/registry/bootstrap/bootstrap.yaml
 ```
 
-### apply the registry to provision new cloud infrastructure and bootstrap the cloud clusters
+### apply the registry for mgmt to the new remote mgmt cluster argocd
 ```sh
-kubectl apply -f https://raw.githubusercontent.com/kubefirst/navigate/main/2024-austin/registry/registry.yaml
+kubectl apply -f https://raw.githubusercontent.com/jarededwards/goop/main/registry/clusters/mgmt/registry.yaml
 ```

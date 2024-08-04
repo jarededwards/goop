@@ -24,6 +24,7 @@ spec:
           readOnlyRootFilesystem: true
           runAsNonRoot: true
           runAsUser: 1000
+        certManagerEnabled: true
     chart: actions-runner-controller
   destination:
     name: in-cluster

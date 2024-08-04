@@ -1,21 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: chartmuseum-components
+  name: reloader-components
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "50"
+    argocd.argoproj.io/sync-wave: "40"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
     repoURL: https://github.com/jarededwards/goop.git
-    path: registry/clusters/mgmt/components/chartmuseum
+    path: registry/clusters/mgmt/components/reloader
     targetRevision: HEAD
   destination:
     name: in-cluster
-    namespace: chartmuseum
+    namespace: reloader
   syncPolicy:
     automated:
       prune: true

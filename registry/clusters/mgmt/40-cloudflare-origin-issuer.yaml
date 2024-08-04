@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cloudflare-origin-issuer-components
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: '40'
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/jarededwards/goop.git
+    path: registry/clusters/mgmt/components/cloudflare-origin-issuer
+    targetRevision: HEAD
+  destination:
+    name: in-cluster
+    namespace: cloudflare-origin-issuer
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

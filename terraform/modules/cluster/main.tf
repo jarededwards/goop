@@ -121,23 +121,6 @@ resource "kubernetes_secret_v1" "external_dns" {
   type = "Opaque"
 }
 
-resource "kubernetes_namespace_v1" "development" {
-  metadata {
-    name = "development"
-  }
-}
-
-resource "kubernetes_secret_v1" "development" {
-  metadata {
-    name      = "cloudflare-secrets"
-    namespace = kubernetes_namespace_v1.development.metadata.0.name
-  }
-  data = {
-    origin-ca-api-key = var.cloudflare_origin_issuer_token
-  }
-  type = "Opaque"
-}
-
 provider "kubernetes" {
   alias = "local"
 }

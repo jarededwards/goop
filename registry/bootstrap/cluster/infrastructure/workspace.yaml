@@ -3,6 +3,7 @@ kind: Workspace
 metadata:
   name: mgmt-infrastructure
 spec:
+  deletionPolicy: Orphan
   providerConfigRef: 
     name: mgmt
   forProvider:

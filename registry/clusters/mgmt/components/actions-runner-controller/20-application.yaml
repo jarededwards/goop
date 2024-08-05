@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://actions-runner-controller.github.io/actions-runner-controller
-    targetRevision: 0.20.2
+    targetRevision: 0.23.7
     helm:
       values: |-
         image:
@@ -24,7 +24,6 @@ spec:
           readOnlyRootFilesystem: true
           runAsNonRoot: true
           runAsUser: 1000
-        certManagerEnabled: true
     chart: actions-runner-controller
   destination:
     name: in-cluster

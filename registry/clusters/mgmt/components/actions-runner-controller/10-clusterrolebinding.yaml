@@ -28,18 +28,3 @@ roleRef:
   kind: ClusterRole
   name: actions-runner-contoller-actions-runner-controller-manager
   apiGroup: rbac.authorization.k8s.io
----
-kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: actions-runner-contoller-actions-runner-controller-manager-clusterrole
-  annotations:
-    argocd.argoproj.io/sync-wave: '0'
-subjects:
-  - kind: ServiceAccount
-    name: actions-runner-contoller-actions-runner-controller
-    namespace: github-runner
-roleRef:
-  kind: ClusterRole
-  name: actions-runner-contoller-actions-runner-controller-manager-secrets
-  apiGroup: rbac.authorization.k8s.io

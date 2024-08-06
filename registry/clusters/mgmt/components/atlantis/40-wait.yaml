@@ -38,7 +38,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "20"
+    argocd.argoproj.io/sync-wave: 40"
   name: wait-atlantis
   namespace: atlantis
 spec:

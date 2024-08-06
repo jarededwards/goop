@@ -26,8 +26,19 @@ k3d cluster create goop --agents "1" --agents-memory "4096m" \
 The `CIVO_TOKEN` will be used by the crossplane terraform provider to allow for provisioning of CIVO cloud infrastructure as well as for external-dns to create and adjust DNS records in your CIVO cloud account. The `CLOUDFLARE_API_TOKEN` will be used to manage DNS records in your Cloudflare zone and `CLOUDFLARE_ORIGIN_CA_KEY` will be used by the Cloudflare Origin CA Issuer controller to get certificates for TLS communication of the metaphor service.
 ```sh
 
+
+#########################################################
+
+DELETE CLUSTER
+DELETE NETWORK
+DELETE OBJECT STORE
+
+CREATE OBJECT STORE
+
+
+#########################################################
+
 # check envs
-echo $CIVO_TOKEN
 echo $CIVO_TOKEN
 echo $AWS_ACCESS_KEY_ID
 echo $AWS_SECRET_ACCESS_KEY
@@ -64,7 +75,10 @@ kubectl apply -f https://raw.githubusercontent.com/jarededwards/goop/main/regist
 
 ### apply the registry for mgmt to the new remote mgmt cluster argocd
 ```sh
-kubectl apply -f https://raw.githubusercontent.com/jarededwards/goop/main/registry/clusters/mgmt/registry.yaml
 # mgmt cluster context
-pbpaste | kubectl apply -f -
+civo k8s config --region nyc1 mgmt --save
+kubectl apply -f https://raw.githubusercontent.com/jarededwards/goop/main/registry/clusters/mgmt/1000-registry.yaml
+
+once external secrets is ready, apply the clustersecretstore 
+# pbpaste | kubectl apply -f -
 ```

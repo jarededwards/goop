@@ -32,7 +32,24 @@ func main() {
 		fmt.Printf("Error marshaling to YAML: %v\n", err)
 		os.Exit(1)
 	}
-	fmt.Println(string(yAppl))
+
+	var appMap map[string]interface{}
+	err = yaml.Unmarshal(yAppl, &appMap)
+	if err != nil {
+		fmt.Printf("error unmarshaling to map: %w", err)
+		os.Exit(1)
+	}
+
+	fmt.Println(appMap)
+
+	// Delete the status field
+	delete(appMap, "status")
+
+	zbaseApp, err := yaml.Marshal(appMap)
+	if err != nil {
+		fmt.Printf("error marshaling clean yaml: %w", err)
+	}
+	fmt.Println(string(zbaseApp))
 
 	path := filepath.Join("gitops/registry/clusters", config.ClusterName, "components", "external-dns")
 	err = utils.CreateDirIfNotExist(path)
@@ -41,7 +58,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	err = os.WriteFile(filepath.Join(path, "application.yaml"), yAppl, 0644)
+	err = os.WriteFile(filepath.Join(path, "application.yaml"), zbaseApp, 0644)
 	if err != nil {
 		fmt.Printf("failed to write file: %v", err)
 		os.Exit(1)

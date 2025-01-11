@@ -1,10 +1,10 @@
-cloudProvider: vultr
+cloudProvider: civo
 clusterName: goop-boop
 gitopsRepoURL: "https://github.com/example/foo.git"
 domainName: feedkray.com
 
 externalDNS:
-  provider: vultr # todo if not specified, default to cloud provider `--dns-provider` 
+  provider: cloudflare # todo if not specified, default to cloud provider `--dns-provider` 
   # domainFilters:
   #   - example.com
 

@@ -4,13 +4,13 @@ image:
 serviceAccount:
   create: true
   name: external-dns
-provider: vultr
+provider: cloudflare
 sources:
 - ingress
 domainFilters:
 - feedkray.com
 env:
-- name: VULTR_API_KEY
+- name: CIVO_TOKEN
   valueFrom:
     secretKeyRef:
       name: external-dns-secrets

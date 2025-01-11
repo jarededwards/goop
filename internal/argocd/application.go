@@ -56,5 +56,6 @@ func CreateBaseApplication(cfg config.Config, a config.ChartInfo) (*v1alpha1.App
 		},
 		Status: v1alpha1.ApplicationStatus{},
 	}
+
 	return &app, nil
 }

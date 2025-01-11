@@ -28,12 +28,3 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
-status:
-  health: {}
-  summary: {}
-  sync:
-    comparedTo:
-      destination: {}
-      source:
-        repoURL: ""
-    status: ""

@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  creationTimestamp: null
+  name: external-dns
+  namespace: argocd
+spec:
+  destination:
+    name: in-cluster
+    namespace: external-dns
+  project: ""
+  source:
+    chart: external-dns
+    repoURL: https://kubernetes-sigs.github.io/external-dns
+    targetRevision: 1.14.4
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+status:
+  health: {}
+  summary: {}
+  sync:
+    comparedTo:
+      destination: {}
+      source:
+        repoURL: ""
+    status: ""

@@ -1,0 +1,17 @@
+image:
+  repository: registry.k8s.io/external-dns/external-dns
+  tag: "v0.13.2"
+serviceAccount:
+  create: true
+  name: external-dns
+provider: cloudflare
+sources:
+- ingress
+domainFilters:
+- kubesecond.com
+env:
+- name: CF_API_TOKEN
+  valueFrom:
+    secretKeyRef:
+      name: external-dns-secrets
+      key: token

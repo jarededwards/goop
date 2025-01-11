@@ -1,2 +1,4 @@
 *-kubeconfig
 clustersecretstore.yaml
+federation/
+notes.md

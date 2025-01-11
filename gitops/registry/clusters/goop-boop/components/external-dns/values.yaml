@@ -1,0 +1,17 @@
+image:
+  repository: registry.k8s.io/external-dns/external-dns
+  tag: "v0.13.2"
+serviceAccount:
+  create: true
+  name: external-dns
+provider: vultr
+sources:
+- ingress
+domainFilters:
+- feedkray.com
+env:
+- name: VULTR_API_KEY
+  valueFrom:
+    secretKeyRef:
+      name: external-dns-secrets
+      key: token

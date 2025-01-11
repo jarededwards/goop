@@ -1,0 +1,21 @@
+cloudProvider: vultr
+clusterName: goop-boop
+gitopsRepoURL: "https://github.com/example/foo.git"
+domainName: feedkray.com
+
+externalDNS:
+  provider: vultr # todo if not specified, default to cloud provider `--dns-provider` 
+  # domainFilters:
+  #   - example.com
+
+git:
+  auth: ssh # https
+  github:
+    username: jarededwards
+    organization: kubewhatever-com
+    repo: goop
+  # gitlab:
+  #   username: jarededwards
+  #   # the fully qualified group path in gitlab my/gitlab/group
+  #   group: kubefirst-test
+  #   repo: goop

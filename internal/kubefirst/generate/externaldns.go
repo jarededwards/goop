@@ -39,6 +39,7 @@ func GenerateExternalDNSApp(config *config.Config) error {
 			return nil, fmt.Errorf("error unmarshaling to map: %w", err)
 		}
 		delete(appMap, "status")
+		utils.DeleteNestedKey(appMap, "metadata.creationTimestamp")
 
 		// Marshal back to YAML
 		return yaml.Marshal(appMap)
@@ -86,9 +87,10 @@ func buildExternalDNSHelmValues(cfg config.Config) (string, error) {
 	}
 
 	data := externaldns.ExternalDNSHelmValues{
+		ClusterName:        cfg.ClusterName,
 		CloudProvider:      cfg.CloudProvider,
 		DomainName:         cfg.DomainName,
-		EnvName:            externaldns.GetAuth(cfg.DNS.Provider),
+		Auth:               externaldns.GetAuth(cfg),
 		Provider:           string(cfg.DNS.Provider),
 		AuthFromAnnotation: []string{string(config.DNSProviderAWS), string(config.DNSProviderAzure), string(config.DNSProviderGoogle)},
 	}

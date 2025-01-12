@@ -9,6 +9,7 @@ import (
 
 type Config struct {
 	CloudProvider string       `yaml:"cloudProvider"`
+	Cloud         Cloud        `yaml:"cloud"`
 	ClusterName   string       `yaml:"clusterName"`
 	DomainName    string       `yaml:"domainName"`
 	DNS           DNS          `yaml:"dns"`
@@ -34,6 +35,12 @@ func ReadPlatformConfig() (*Config, error) {
 	if err != nil {
 		return nil, fmt.Errorf("error parsing kubefirst %q: %w", kubefirstConfig, err)
 	}
+
+	err = hydrateCloudConfig(&config)
+	if err != nil {
+		return nil, fmt.Errorf("error hydrating cloud config: %w", err)
+	}
+	fmt.Printf("%+v", config)
 
 	//! pull into isolate function
 	gitprov, err := DetermineGitProvider(config.Git)
@@ -68,4 +75,48 @@ func ReadPlatformConfig() (*Config, error) {
 	fmt.Printf("DNS provider: %v\n", config.DNS.Provider)
 
 	return &config, nil
+}
+
+func hydrateCloudConfig(cfg *Config) error {
+	switch cfg.CloudProvider {
+	case "aws":
+		// TODO look these values up and hydrate the cloud object
+		// get region
+		region := "us-west-2"
+		// get account id
+		accountID := "126827061464"
+		awsConfig := []byte(fmt.Sprintf("aws:\n  region: %v\n  accountID: %v\n", region, accountID))
+
+		err := yaml.Unmarshal(awsConfig, &cfg.Cloud)
+		if err != nil {
+			return fmt.Errorf("error parsing aws config: %w", err)
+		}
+	// TODO constants CloudProvider
+	case "azure":
+		// TODO look these values up and hydrate the cloud object
+		// get region
+		region := "us-west-2"
+		// get account id
+		identityClientID := "MYAZURECLIENTID"
+		azureConfig := []byte(fmt.Sprintf("azure:\n  region: %v\n  identityClientID: %v\n", region, identityClientID))
+
+		err := yaml.Unmarshal(azureConfig, &cfg.Cloud)
+		if err != nil {
+			return fmt.Errorf("error parsing azure config: %w", err)
+		}
+	case "google":
+		// TODO look these values up and hydrate the cloud object
+		// get region
+		region := "us-central1"
+		// get account id
+		projectName := "gcp-je"
+		googleConfig := []byte(fmt.Sprintf("google:\n  region: %v\n  projectName: %v\n", region, projectName))
+
+		err := yaml.Unmarshal(googleConfig, &cfg.Cloud)
+		if err != nil {
+			return fmt.Errorf("error parsing google config: %w", err)
+		}
+	}
+
+	return nil
 }

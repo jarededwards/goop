@@ -1,17 +1,21 @@
-image:
+eimage:
   repository: registry.k8s.io/external-dns/external-dns
   tag: "v0.13.2"
 serviceAccount:
   create: true
   name: external-dns
+{{- if in .AuthFromAnnotation .Provider }}
+  annotations:
+    {{ .Auth }}
+{{- end }}
 provider: {{ .Provider }}
 sources:
 - ingress
 domainFilters:
 - {{ .DomainName }}
-{{- if notIn .AuthFromAnnotation .Provider }}
+{{- if (notIn .AuthFromAnnotation .Provider)}}
 env:
-- name: {{ .EnvName }}
+- name: {{ .Auth }}
   valueFrom:
     secretKeyRef:
       name: external-dns-secrets

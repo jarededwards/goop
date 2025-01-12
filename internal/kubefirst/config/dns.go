@@ -7,7 +7,7 @@ import (
 type DNS struct {
 	Provider                 DNSProvider       `yaml:"provider"`
 	DomainFilters            []string          `yaml:"domainFilters"`
-	EnvName                  string            `yaml:"envName"`
+	Auth                     string            `yaml:"Auth"`
 	Annotations              map[string]string `yaml:"annotations"`
 	ExternalDNSHelmChartInfo ChartInfo         `yaml:"externalDNSHelmChartInfo"`
 }
@@ -30,7 +30,7 @@ const (
 func DetermineDNSProvider(dnsProvider DNSProvider) (DNSProvider, error) {
 
 	switch DNSProvider(dnsProvider) {
-	case DNSProviderCloudflare, DNSProviderAkamai, DNSProviderAWS, DNSProviderAzure, DNSProviderCivo, DNSProviderDigitalOcean, DNSProviderVultr:
+	case DNSProviderCloudflare, DNSProviderAkamai, DNSProviderAWS, DNSProviderAzure, DNSProviderCivo, DNSProviderDigitalOcean, DNSProviderGoogle, DNSProviderVultr:
 		return DNSProvider(dnsProvider), nil
 	default:
 		return "", fmt.Errorf("unsupported DNS provider: %s", dnsProvider)

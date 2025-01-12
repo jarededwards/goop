@@ -1,4 +1,4 @@
-cloudProvider: civo
+cloudProvider: azure
 clusterName: goop-boop
 domainName: feedkray.com
 

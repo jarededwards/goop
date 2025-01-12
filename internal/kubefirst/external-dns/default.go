@@ -1,6 +1,10 @@
 package externaldns
 
-import "github.com/jarededwards/goop/internal/kubefirst/config"
+import (
+	"fmt"
+
+	"github.com/jarededwards/goop/internal/kubefirst/config"
+)
 
 var ExternalDNSChartInfo = config.ChartInfo{
 	Name:                        "external-dns",
@@ -17,30 +21,31 @@ var ExternalDNSChartInfo = config.ChartInfo{
 }
 
 type ExternalDNSHelmValues struct {
+	ClusterName        string
 	CloudProvider      string
 	DomainName         string
-	EnvName            string
+	Auth               string
 	Provider           string
 	AuthFromAnnotation []string
 }
 
-func GetAuth(dnsProvider config.DNSProvider) string {
+func GetAuth(cfg config.Config) string {
 
-	switch dnsProvider {
+	switch cfg.DNS.Provider {
 	case config.DNSProviderCloudflare:
 		return "CF_API_TOKEN"
 	case config.DNSProviderAkamai:
 		return "LINODE_TOKEN"
 	case config.DNSProviderAWS:
-		return "eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/external-dns-<CLUSTER_NAME>"
+		return fmt.Sprintf("eks.amazonaws.com/role-arn: arn:aws:iam::%s:role/external-dns-%s", cfg.Cloud.AWS.AccountID, cfg.ClusterName)
 	case config.DNSProviderAzure:
-		return "azure.workload.identity/client-id: <IDENTITY_CLIENT_ID>"
+		return fmt.Sprintf("azure.workload.identity/client-id: %s", cfg.Cloud.Azure.IdentityClientID)
 	case config.DNSProviderCivo:
 		return "CIVO_TOKEN"
 	case config.DNSProviderDigitalOcean:
 		return "DO_TOKEN"
 	case config.DNSProviderGoogle:
-		return "iam.gke.io/gcp-service-account: external-dns-<CLUSTER_NAME>@<GOOGLE_PROJECT>.iam.gserviceaccount.com"
+		return fmt.Sprintf("iam.gke.io/gcp-service-account: external-dns-%s@%s.iam.gserviceaccount.com", cfg.ClusterName, cfg.Cloud.Google.ProjectName)
 	case config.DNSProviderVultr:
 		return "VULTR_API_KEY"
 	default:

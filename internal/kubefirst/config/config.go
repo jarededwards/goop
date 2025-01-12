@@ -11,7 +11,7 @@ type Config struct {
 	CloudProvider string       `yaml:"cloudProvider"`
 	ClusterName   string       `yaml:"clusterName"`
 	DomainName    string       `yaml:"domainName"`
-	ExternalDNS   ExternalDNS  `yaml:"externalDNS"`
+	DNS           DNS          `yaml:"dns"`
 	Git           Git          `yaml:"git"`
 	GitopsConfig  GitopsConfig `yaml:"gitopsConfig"`
 }
@@ -35,7 +35,8 @@ func ReadPlatformConfig() (*Config, error) {
 		return nil, fmt.Errorf("error parsing kubefirst %q: %w", kubefirstConfig, err)
 	}
 
-	gitprov, err := DetermineProvider(config.Git)
+	//! pull into isolate function
+	gitprov, err := DetermineGitProvider(config.Git)
 	if err != nil {
 		return nil, fmt.Errorf("error determining git provider: %w", err)
 	}
@@ -55,7 +56,16 @@ func ReadPlatformConfig() (*Config, error) {
 		}
 	}
 
+	if config.DNS.Provider == "" {
+		provider, err := DetermineDNSProvider(DNSProvider(config.CloudProvider))
+		if err != nil {
+			return nil, fmt.Errorf("error determining DNS provider: %w", err)
+		}
+		config.DNS.Provider = provider
+	}
+
 	fmt.Printf("Git provider: %v\n", gitprov)
+	fmt.Printf("DNS provider: %v\n", config.DNS.Provider)
 
 	return &config, nil
 }

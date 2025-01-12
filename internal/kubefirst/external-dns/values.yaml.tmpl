@@ -9,9 +9,23 @@ sources:
 - ingress
 domainFilters:
 - {{ .DomainName }}
+{{- if notIn .AuthFromAnnotation .Provider }}
 env:
 - name: {{ .EnvName }}
   valueFrom:
     secretKeyRef:
       name: external-dns-secrets
       key: token
+{{- end }}
+
+{{- if eq .Provider "azure" }}
+extraVolumes:
+- name: azure-config-file
+  secret:
+    secretName: external-dns-secrets # Set in Terraform
+    optional: true
+extraVolumeMounts:
+- name: azure-config-file
+  mountPath: /etc/kubernetes
+  readOnly: true
+{{- end }}

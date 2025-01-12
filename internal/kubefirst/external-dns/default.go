@@ -17,30 +17,31 @@ var ExternalDNSChartInfo = config.ChartInfo{
 }
 
 type ExternalDNSHelmValues struct {
-	CloudProvider string
-	DomainName    string
-	EnvName       string
-	Provider      string
+	CloudProvider      string
+	DomainName         string
+	EnvName            string
+	Provider           string
+	AuthFromAnnotation []string
 }
 
-func GetExternalDNSAuth(cloudProvider string) string {
+func GetAuth(dnsProvider config.DNSProvider) string {
 
-	switch cloudProvider {
-	case "cloudflare":
+	switch dnsProvider {
+	case config.DNSProviderCloudflare:
 		return "CF_API_TOKEN"
-	case "akamai":
+	case config.DNSProviderAkamai:
 		return "LINODE_TOKEN"
-	case "aws":
+	case config.DNSProviderAWS:
 		return "eks.amazonaws.com/role-arn: arn:aws:iam::<AWS_ACCOUNT_ID>:role/external-dns-<CLUSTER_NAME>"
-	case "azure":
+	case config.DNSProviderAzure:
 		return "azure.workload.identity/client-id: <IDENTITY_CLIENT_ID>"
-	case "civo":
+	case config.DNSProviderCivo:
 		return "CIVO_TOKEN"
-	case "digitalocean":
+	case config.DNSProviderDigitalOcean:
 		return "DO_TOKEN"
-	case "gcp":
+	case config.DNSProviderGoogle:
 		return "iam.gke.io/gcp-service-account: external-dns-<CLUSTER_NAME>@<GOOGLE_PROJECT>.iam.gserviceaccount.com"
-	case "vultr":
+	case config.DNSProviderVultr:
 		return "VULTR_API_KEY"
 	default:
 		return "NOT_SUPPORTED"

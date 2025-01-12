@@ -1,12 +1,9 @@
 cloudProvider: civo
 clusterName: goop-boop
-gitopsRepoURL: "https://github.com/example/foo.git"
 domainName: feedkray.com
 
-externalDNS:
-  provider: cloudflare # todo if not specified, default to cloud provider `--dns-provider` 
-  # domainFilters:
-  #   - example.com
+# dns:
+#   provider: cloudflare
 
 git:
   auth: ssh # https

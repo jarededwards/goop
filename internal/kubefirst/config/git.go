@@ -31,8 +31,8 @@ const (
 	ProviderGitLab GitProvider = "gitlab"
 )
 
-// DetermineProvider figures out which provider is configured
-func DetermineProvider(git Git) (GitProvider, error) {
+// DetermineGitProvider figures out which provider is configured
+func DetermineGitProvider(git Git) (GitProvider, error) {
 	// Check if GitHub is configured
 	if git.GitHub != (GitHub{}) {
 		return ProviderGitHub, nil
@@ -46,7 +46,7 @@ func DetermineProvider(git Git) (GitProvider, error) {
 
 // Example of using a switch statement with the provider
 func HandleGitProvider(git Git) error {
-	provider, err := DetermineProvider(git)
+	provider, err := DetermineGitProvider(git)
 	if err != nil {
 		return err
 	}

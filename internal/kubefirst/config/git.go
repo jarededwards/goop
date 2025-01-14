@@ -2,7 +2,6 @@ package config
 
 import (
 	"errors"
-	"fmt"
 )
 
 type Git struct {
@@ -42,41 +41,4 @@ func DetermineGitProvider(git Git) (GitProvider, error) {
 		return ProviderGitLab, nil
 	}
 	return "", errors.New("no git provider configured")
-}
-
-// Example of using a switch statement with the provider
-func HandleGitProvider(git Git) error {
-	provider, err := DetermineGitProvider(git)
-	if err != nil {
-		return err
-	}
-
-	switch provider {
-	case ProviderGitHub:
-		return handleGitHub(git.GitHub)
-	case ProviderGitLab:
-		return handleGitLab(git.GitLab)
-	default:
-		return fmt.Errorf("unsupported git provider: %s", provider)
-	}
-}
-
-// Example handler for GitHub operations
-func handleGitHub(github GitHub) error {
-	fmt.Printf("Processing GitHub repo: %s/%s/%s\n",
-		github.Username,
-		github.Organization,
-		github.Repo)
-	// Add your GitHub-specific logic here
-	return nil
-}
-
-// Example handler for GitLab operations
-func handleGitLab(gitlab GitLab) error {
-	fmt.Printf("Processing GitLab repo: %s/%s/%s\n",
-		gitlab.Username,
-		gitlab.Group,
-		gitlab.Repo)
-	// Add your GitLab-specific logic here
-	return nil
 }

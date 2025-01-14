@@ -1,23 +1,22 @@
 package externaldns
 
 import (
+	"bytes"
 	"fmt"
+	"os"
+	"path/filepath"
+	"text/template"
 
+	"github.com/jarededwards/goop/internal/kubefirst"
 	"github.com/jarededwards/goop/internal/kubefirst/config"
 )
 
-var ExternalDNSChartInfo = config.ChartInfo{
-	Name:                        "external-dns",
-	Namespace:                   "argocd",
-	HelmChartRepoURL:            "https://kubernetes-sigs.github.io/external-dns",
-	TargetRevision:              "1.14.4",
-	HelmChart:                   "external-dns",
-	DestinationClusterNamespace: "external-dns",
-	DestinationClusterName:      "in-cluster",
-	Project:                     "default",
-	Annotations: map[string]string{
-		"argocd.argoproj.io/sync-wave": "10",
-	},
+const Name = "external-dns"
+
+var ChartInfo = config.ChartInfo{
+	Name:           Name,
+	RepoURL:        "https://kubernetes-sigs.github.io/external-dns",
+	TargetRevision: "1.14.4",
 }
 
 type ExternalDNSHelmValues struct {
@@ -27,6 +26,35 @@ type ExternalDNSHelmValues struct {
 	Auth               string
 	Provider           string
 	AuthFromAnnotation []string
+}
+
+func BuildHelmValues(readPath, writePath string, data ExternalDNSHelmValues) error {
+
+	file, err := kubefirst.ExternalDNS.ReadFile(readPath)
+	if err != nil {
+		return fmt.Errorf("error reading templates file: %w", err)
+	}
+
+	var buff bytes.Buffer
+
+	tmpl, err := template.New("tmpl").Funcs(config.Funcs).Parse(string(file))
+	if err != nil {
+		return fmt.Errorf("error parsing template: %w", err)
+	}
+
+	err = tmpl.Execute(&buff, data)
+	if err != nil {
+		return fmt.Errorf("error executing template: %w", err)
+	}
+
+	fmt.Printf("%+v", buff.String())
+
+	err = os.WriteFile(filepath.Join(writePath, "values.yaml"), buff.Bytes(), 0644)
+	if err != nil {
+		return fmt.Errorf("failed to write file: %w", err)
+	}
+
+	return nil
 }
 
 func GetAuth(cfg config.Config) string {

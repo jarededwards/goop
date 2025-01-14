@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "{{ .SyncWave }}"
+  name: {{ .Name }}
+  namespace: {{ .Namespace }}
+spec:
+  destination:
+    name: {{ .DestinationClusterName }}
+    namespace: {{ .Name }}
+  project: {{ .Project}}
+  sources:
+  - chart: {{ .ChartInfo.Name }}
+    helm:
+      releaseName: {{ .Name }}
+      valueFiles:
+      - $values/registry/clusters/{{ .ClusterName }}/components/{{ .Name }}/values.yaml
+    repoURL: {{ .ChartInfo.RepoURL }}
+    targetRevision: {{ .ChartInfo.TargetRevision }}
+  - ref: values
+    repoURL: {{ .GitopsRepoURL }}
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+

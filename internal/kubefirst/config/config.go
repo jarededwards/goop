@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"os"
+	"text/template"
 
 	"gopkg.in/yaml.v2"
 )
@@ -40,7 +41,8 @@ func ReadPlatformConfig() (*Config, error) {
 	if err != nil {
 		return nil, fmt.Errorf("error hydrating cloud config: %w", err)
 	}
-	fmt.Printf("%+v", config)
+	//! debug
+	// fmt.Printf("%+v", config)
 
 	//! pull into isolate function
 	gitprov, err := DetermineGitProvider(config.Git)
@@ -70,9 +72,6 @@ func ReadPlatformConfig() (*Config, error) {
 		}
 		config.DNS.Provider = provider
 	}
-
-	fmt.Printf("Git provider: %v\n", gitprov)
-	fmt.Printf("DNS provider: %v\n", config.DNS.Provider)
 
 	return &config, nil
 }
@@ -119,4 +118,23 @@ func hydrateCloudConfig(cfg *Config) error {
 	}
 
 	return nil
+}
+
+var Funcs = template.FuncMap{
+	"in": func(slice []string, item string) bool {
+		for _, s := range slice {
+			if s == item {
+				return true
+			}
+		}
+		return false
+	},
+	"notIn": func(slice []string, item string) bool {
+		for _, s := range slice {
+			if s == item {
+				return false
+			}
+		}
+		return true
+	},
 }

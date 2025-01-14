@@ -1,14 +1,18 @@
 package config
 
-// ! deprecated
-type BaseApplication struct {
-	Annotations                 map[string]string
-	DestinationClusterNamespace string
-	DestinationClusterName      string
-	HelmChart                   string
-	HelmChartRepoURL            string
-	Name                        string
-	Namespace                   string
-	Project                     string
-	TargetRevision              string
+type ChartInfo struct {
+	Name           string
+	RepoURL        string
+	TargetRevision string
+}
+
+type ApplicationInfo struct {
+	ChartInfo              ChartInfo
+	GitopsRepoURL          string
+	SyncWave               int
+	Project                string
+	Name                   string
+	Namespace              string
+	DestinationClusterName string
+	ClusterName            string
 }

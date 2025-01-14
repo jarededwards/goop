@@ -5,8 +5,11 @@ domainName: feedkray.com
 # dns:
 #   provider: cloudflare
 
+secrets:
+  provider: ssm
+
 git:
-  auth: ssh # https
+  auth: https # https
   github:
     username: jarededwards
     organization: kubewhatever-com

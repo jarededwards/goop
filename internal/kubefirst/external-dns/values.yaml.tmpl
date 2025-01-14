@@ -1,4 +1,4 @@
-eimage:
+image:
   repository: registry.k8s.io/external-dns/external-dns
   tag: "v0.13.2"
 serviceAccount:
@@ -13,7 +13,7 @@ sources:
 - ingress
 domainFilters:
 - {{ .DomainName }}
-{{- if (notIn .AuthFromAnnotation .Provider)}}
+{{- if notIn .AuthFromAnnotation .Provider }}
 env:
 - name: {{ .Auth }}
   valueFrom:

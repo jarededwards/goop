@@ -5,11 +5,17 @@ import (
 )
 
 type DNS struct {
-	Provider                 DNSProvider       `yaml:"provider"`
-	DomainFilters            []string          `yaml:"domainFilters"`
-	Auth                     string            `yaml:"Auth"`
 	Annotations              map[string]string `yaml:"annotations"`
+	Auth                     string            `yaml:"Auth"`
+	Cloudflare               Cloudflare        `yaml:"cloudflare"`
+	DomainFilters            []string          `yaml:"domainFilters"`
 	ExternalDNSHelmChartInfo ChartInfo         `yaml:"externalDNSHelmChartInfo"`
+	Provider                 DNSProvider       `yaml:"provider"`
+}
+
+type Cloudflare struct {
+	APIToken        string `yaml:"apiToken"`
+	OriginIssuerKey string `yaml:"originIssuerKey"`
 }
 
 // DNSProvider represents the type of git provider

@@ -1,12 +1,9 @@
-cloudProvider: azure
+cloudProvider: civo
 clusterName: goop-boop
 domainName: feedkray.com
 
 # dns:
 #   provider: cloudflare
-
-secrets:
-  provider: ssm
 
 git:
   auth: https # https

@@ -42,6 +42,12 @@ func main() {
 		os.Exit(1)
 	}
 
+	err = generate.Reloader(cfg, path)
+	if err != nil {
+		fmt.Printf("Error generating ingress-nginx app: %v\n", err)
+		os.Exit(1)
+	}
+
 	//! decorate annotations for ingress
 	//! decorate annotations for sync wave ordering
 	//! should add a kubefirst.konstruct.io/$somehting annotation for tracking?

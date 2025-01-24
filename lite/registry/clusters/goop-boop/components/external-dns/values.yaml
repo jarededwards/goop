@@ -1,6 +1,3 @@
-image:
-  repository: registry.k8s.io/external-dns/external-dns
-  tag: "v0.13.2"
 serviceAccount:
   create: true
   name: external-dns

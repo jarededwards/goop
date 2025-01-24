@@ -16,7 +16,7 @@ func CertManager(cfg *config.Config, path string) error {
 	applicationData := config.ApplicationInfo{
 		ChartInfo:              certmanager.ChartInfo,
 		GitopsRepoURL:          cfg.GitopsConfig.RepoURL,
-		SyncWave:               40,
+		SyncWave:               10,
 		Project:                "default",
 		Name:                   certmanager.Name,
 		Namespace:              "argocd",

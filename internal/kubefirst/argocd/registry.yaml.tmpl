@@ -5,17 +5,17 @@ metadata:
     argocd.argoproj.io/sync-wave: "{{ .SyncWave }}"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
-  name: {{ .Name }}-components
+  name: registry-{{ .ClusterName }}
   namespace: {{ .Namespace }}
 spec:
   destination:
     name: {{ .DestinationClusterName }}
-    namespace: {{ .Name }}
+    namespace: {{ .Namespace }}
   project: {{ .Project}}
   source:
-    path: registry/clusters/{{ .ClusterName }}/components/{{ .Name }}
+    path: registry/clusters/{{ .ClusterName }}
     repoURL: {{ .GitopsRepoURL }}
-    targetRevision: HEAD
+    targetRevision: {{ .ChartInfo.TargetRevision }} # this isnt right refs in tmpl
   syncPolicy:
     automated:
       prune: true

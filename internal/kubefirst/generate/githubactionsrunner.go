@@ -5,44 +5,44 @@ import (
 	"path/filepath"
 
 	"github.com/jarededwards/goop/internal/kubefirst/config"
-	ingressnginx "github.com/jarededwards/goop/internal/kubefirst/ingress-nginx"
+	githubactionsrunner "github.com/jarededwards/goop/internal/kubefirst/github-actions-runner"
 	"github.com/jarededwards/goop/internal/utils"
 )
 
-func IngressNginx(cfg *config.Config, path string) error {
+func GitHubActionsRunner(cfg *config.Config, path string) error {
 
-	fmt.Printf("building %s Application wrapper\n", ingressnginx.Name)
+	fmt.Printf("building %s Application wrapper\n", githubactionsrunner.Name)
 
 	applicationData := config.ApplicationInfo{
-		ChartInfo:              ingressnginx.ChartInfo,
+		ChartInfo:              githubactionsrunner.ChartInfo,
 		GitopsRepoURL:          cfg.GitopsConfig.RepoURL,
-		SyncWave:               10,
+		SyncWave:               40,
 		Project:                "default",
-		Name:                   ingressnginx.Name,
+		Name:                   githubactionsrunner.Name,
 		Namespace:              "argocd",
 		DestinationClusterName: "in-cluster",
 		ClusterName:            cfg.ClusterName,
 	}
 
-	err := buildApplication("argocd/application-wrapper.yaml.tmpl", filepath.Join(path, fmt.Sprintf("%s.yaml", ingressnginx.Name)), applicationData)
+	err := buildApplication("argocd/application-wrapper.yaml.tmpl", filepath.Join(path, fmt.Sprintf("%s.yaml", githubactionsrunner.Name)), applicationData)
 	if err != nil {
 		return fmt.Errorf("error building application: %w", err)
 	}
 
-	fmt.Printf("building %s Application\n", ingressnginx.Name)
+	fmt.Printf("building %s Application\n", githubactionsrunner.Name)
 
 	applicationData.SyncWave = 10
 
-	path = filepath.Join(path, "components", ingressnginx.Name)
+	path = filepath.Join(path, "components", githubactionsrunner.Name)
 
 	err = utils.CreateDirIfNotExist(path)
 	if err != nil {
 		return fmt.Errorf("failed to create directory: %v", err)
 	}
 
-	fmt.Printf("building %s helm values\n", ingressnginx.Name)
+	fmt.Printf("building %s helm values\n", githubactionsrunner.Name)
 
-	err = ingressnginx.BuildHelmValues(fmt.Sprintf("%s/values.yaml.tmpl", ingressnginx.Name), path)
+	err = githubactionsrunner.BuildHelmValues(fmt.Sprintf("%s/values.yaml.tmpl", githubactionsrunner.Name), path)
 	if err != nil {
 		return fmt.Errorf("error building application: %w", err)
 	}

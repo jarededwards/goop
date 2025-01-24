@@ -2,11 +2,11 @@ cloudProvider: civo
 clusterName: goop-boop
 domainName: feedkray.com
 
-# dns:
-#   provider: cloudflare
+dns:
+  provider: cloudflare
 
 git:
-  auth: https # https
+  auth: ssh # https
   github:
     username: jarededwards
     organization: kubewhatever-com
@@ -16,3 +16,8 @@ git:
   #   # the fully qualified group path in gitlab my/gitlab/group
   #   group: kubefirst-test
   #   repo: goop
+
+
+# ingresNginx:
+#   extraArgs:
+#     - --enable-ssl-passthrough

@@ -18,3 +18,6 @@ var IngressNginx embed.FS
 
 //go:embed reloader/*.yaml.tmpl
 var Reloader embed.FS
+
+//go:embed github-actions-runner/*.yaml.tmpl
+var GitHubActionsRunner embed.FS

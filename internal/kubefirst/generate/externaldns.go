@@ -16,7 +16,7 @@ func ExternalDNS(cfg *config.Config, path string) error {
 	applicationData := config.ApplicationInfo{
 		ChartInfo:              externaldns.ChartInfo,
 		GitopsRepoURL:          cfg.GitopsConfig.RepoURL,
-		SyncWave:               40,
+		SyncWave:               10,
 		Project:                "default",
 		Name:                   externaldns.Name,
 		Namespace:              "argocd",

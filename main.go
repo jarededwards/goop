@@ -42,11 +42,23 @@ func main() {
 		os.Exit(1)
 	}
 
-	err = generate.Reloader(cfg, path)
+	err = generate.Registry(cfg, path)
 	if err != nil {
-		fmt.Printf("Error generating ingress-nginx app: %v\n", err)
+		fmt.Printf("Error generating registry app: %v\n", err)
 		os.Exit(1)
 	}
+
+	// err = generate.Reloader(cfg, path)
+	// if err != nil {
+	// 	fmt.Printf("Error generating reloader app: %v\n", err)
+	// 	os.Exit(1)
+	// }
+
+	// err = generate.GitHubActionsRunner(cfg, path)
+	// if err != nil {
+	// 	fmt.Printf("Error generating github-actions-runner app: %v\n", err)
+	// 	os.Exit(1)
+	// }
 
 	//! decorate annotations for ingress
 	//! decorate annotations for sync wave ordering

@@ -3,6 +3,8 @@ kind: Application
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "{{ .SyncWave }}"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
   name: {{ .Name }}
   namespace: {{ .Namespace }}
 spec:

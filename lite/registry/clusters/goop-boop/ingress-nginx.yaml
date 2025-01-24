@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  name: ingress-nginx-components
+  namespace: argocd
+spec:
+  destination:
+    name: in-cluster
+    namespace: ingress-nginx
+  project: default
+  source:
+    path: registry/clusters/goop-boop/components/ingress-nginx
+    repoURL: git@github.com:kubewhatever-com/goop.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

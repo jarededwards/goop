@@ -13,8 +13,8 @@ spec:
     namespace: external-dns
   project: default
   source:
-    path: registry/clusters/goop-boop/components/external-dns
-    repoURL: git@github.com:kubewhatever-com/goop.git
+    path: lite/registry/clusters/goop-boop/components/external-dns
+    repoURL: https://github.com/jarededwards/goop.git
     targetRevision: HEAD
   syncPolicy:
     automated:

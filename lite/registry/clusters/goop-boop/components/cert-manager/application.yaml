@@ -17,11 +17,11 @@ spec:
     helm:
       releaseName: cert-manager
       valueFiles:
-      - $values/registry/clusters/goop-boop/components/cert-manager/values.yaml
+      - $values/lite/registry/clusters/goop-boop/components/cert-manager/values.yaml
     repoURL: https://charts.jetstack.io
     targetRevision: v1.15.2
   - ref: values
-    repoURL: git@github.com:kubewhatever-com/goop.git
+    repoURL: https://github.com/jarededwards/goop.git
     targetRevision: HEAD
   syncPolicy:
     automated:

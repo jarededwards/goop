@@ -17,11 +17,11 @@ spec:
     helm:
       releaseName: external-dns
       valueFiles:
-      - $values/registry/clusters/goop-boop/components/external-dns/values.yaml
+      - $values/lite/registry/clusters/goop-boop/components/external-dns/values.yaml
     repoURL: https://kubernetes-sigs.github.io/external-dns
     targetRevision: 1.14.4
   - ref: values
-    repoURL: git@github.com:kubewhatever-com/goop.git
+    repoURL: https://github.com/jarededwards/goop.git
     targetRevision: HEAD
   syncPolicy:
     automated:

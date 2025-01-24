@@ -17,7 +17,7 @@ spec:
     helm:
       releaseName: {{ .Name }}
       valueFiles:
-      - $values/registry/clusters/{{ .ClusterName }}/components/{{ .Name }}/values.yaml
+      - $values/lite/registry/clusters/{{ .ClusterName }}/components/{{ .Name }}/values.yaml
     repoURL: {{ .ChartInfo.RepoURL }}
     targetRevision: {{ .ChartInfo.TargetRevision }}
   - ref: values

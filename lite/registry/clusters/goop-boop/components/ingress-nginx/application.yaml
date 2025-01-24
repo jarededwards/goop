@@ -17,11 +17,11 @@ spec:
     helm:
       releaseName: ingress-nginx
       valueFiles:
-      - $values/registry/clusters/goop-boop/components/ingress-nginx/values.yaml
+      - $values/lite/registry/clusters/goop-boop/components/ingress-nginx/values.yaml
     repoURL: https://kubernetes.github.io/ingress-nginx
     targetRevision: 4.10.0
   - ref: values
-    repoURL: git@github.com:kubewhatever-com/goop.git
+    repoURL: https://github.com/jarededwards/goop.git
     targetRevision: HEAD
   syncPolicy:
     automated:

@@ -13,7 +13,7 @@ spec:
     namespace: {{ .Namespace }}
   project: {{ .Project}}
   source:
-    path: registry/clusters/{{ .ClusterName }}
+    path: lite/registry/clusters/{{ .ClusterName }}
     repoURL: {{ .GitopsRepoURL }}
     targetRevision: {{ .ChartInfo.TargetRevision }} # this isnt right refs in tmpl
   syncPolicy:

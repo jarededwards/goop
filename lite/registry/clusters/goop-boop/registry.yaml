@@ -13,8 +13,8 @@ spec:
     namespace: argocd
   project: default
   source:
-    path: registry/clusters/goop-boop
-    repoURL: git@github.com:kubewhatever-com/goop.git
+    path: lite/registry/clusters/goop-boop
+    repoURL: https://github.com/jarededwards/goop.git
     targetRevision: HEAD # this isnt right refs in tmpl
   syncPolicy:
     automated:

@@ -6,10 +6,10 @@ dns:
   provider: cloudflare
 
 git:
-  auth: ssh # https
+  auth: https
   github:
     username: jarededwards
-    organization: kubewhatever-com
+    organization: jarededwards
     repo: goop
   # gitlab:
   #   username: jarededwards

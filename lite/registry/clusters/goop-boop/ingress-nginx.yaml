@@ -13,8 +13,8 @@ spec:
     namespace: ingress-nginx
   project: default
   source:
-    path: registry/clusters/goop-boop/components/ingress-nginx
-    repoURL: git@github.com:kubewhatever-com/goop.git
+    path: lite/registry/clusters/goop-boop/components/ingress-nginx
+    repoURL: https://github.com/jarededwards/goop.git
     targetRevision: HEAD
   syncPolicy:
     automated:

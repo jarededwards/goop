@@ -13,7 +13,7 @@ spec:
     namespace: {{ .Name }}
   project: {{ .Project}}
   source:
-    path: registry/clusters/{{ .ClusterName }}/components/{{ .Name }}
+    path: lite/registry/clusters/{{ .ClusterName }}/components/{{ .Name }}
     repoURL: {{ .GitopsRepoURL }}
     targetRevision: HEAD
   syncPolicy:

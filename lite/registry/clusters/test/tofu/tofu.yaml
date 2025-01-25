@@ -1,11 +1,11 @@
 apiVersion: infra.contrib.fluxcd.io/v1alpha2
 kind: Terraform
 metadata:
-  name: hello-world
+  name: hello-world2
   namespace: flux-system
 spec:
   path: ./hello-world
-  interval: 1m
+  interval: 10m
   approvePlan: auto
   sourceRef:
     kind: GitRepository
@@ -18,9 +18,9 @@ spec:
   - kind: Secret
     name: "tofu-secrets"
   vars:
-    - name: cluster_name
-      value: test-cluster
-    - name: node_type
-      value: g4s.kube.medium
-    - name: node_count
-      value: "3"
+  - name: cluster_name
+    value: test-cluster
+  - name: node_type
+    value: g4s.kube.medium
+  - name: node_count
+    value: "3"

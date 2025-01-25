@@ -1,0 +1,11 @@
+apiVersion: infra.contrib.fluxcd.io/v1alpha2
+kind: Terraform
+metadata:
+  name: hello-world
+spec:
+  path: ./hello-world
+  interval: 10m
+  approvePlan: auto
+  sourceRef:
+    kind: GitRepository
+    name: flux-system

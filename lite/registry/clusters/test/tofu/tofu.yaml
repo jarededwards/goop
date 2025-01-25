@@ -10,3 +10,17 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
+  # writeInputsToSecret:
+  #   name: hello-world-tf-inputs
+  # secretRef:
+  #   name: hello-world-tf-vars
+  varsReference:
+  - kind: Secret
+    name: "tofu-secrets"
+  vars:
+    - key: cluster_name
+      value: test-cluster
+    - key: node_type
+      value: g4s.kube.medium
+    - key: node_count
+      value: "3"

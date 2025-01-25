@@ -1,5 +1,4 @@
-resource null_resource "example" {
-  provisioner "local-exec" {
-    command = "sleep 999"
-  }
+resource "time_sleep" "wait_30_seconds" {
+
+  create_duration = "999s"
 }

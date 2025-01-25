@@ -18,9 +18,9 @@ spec:
   - kind: Secret
     name: "tofu-secrets"
   vars:
-    - key: cluster_name
+    - name: cluster_name
       value: test-cluster
-    - key: node_type
+    - name: node_type
       value: g4s.kube.medium
-    - key: node_count
+    - name: node_count
       value: "3"

@@ -1,3 +1,15 @@
+##! uncomment this block to run terraform locally
+terraform {
+  required_providers {
+    civo = {
+      source = "civo/civo"
+    }
+  }
+}
+provider "civo" {
+  region = "nyc1"
+}
+
 variable "cluster_name" {
   type    = string
 }

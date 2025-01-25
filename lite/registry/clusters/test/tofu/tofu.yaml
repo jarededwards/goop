@@ -14,7 +14,7 @@ spec:
   #   name: hello-world-tf-inputs
   # secretRef:
   #   name: hello-world-tf-vars
-  varsReference:
+  varsFrom:
   - kind: Secret
     name: "tofu-secrets"
   vars:

@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cloudflare-origin-ca-issuer
-  namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: '50'
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  name: cloudflare-origin-ca-issuer
+  namespace: argocd
 spec:
   project: default
   source:
@@ -18,14 +18,14 @@ spec:
         global:
           rbac:
             create: true
-        controller:
-          image:
-            repository: cloudflare/origin-ca-issuer
-            tag: v0.6.1
-            pullPolicy: Always
+        # controller:
+        #   image:
+        #     repository: cloudflare/origin-ca-issuer
+        #     tag: v0.6.1
+        #     pullPolicy: Always
   destination:
     name: in-cluster
-    namespace: cert-manager
+    namespace: cloudflare-origin
   syncPolicy:
     automated:
       prune: true

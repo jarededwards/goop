@@ -1,7 +1,7 @@
 apiVersion: infra.contrib.fluxcd.io/v1alpha2
 kind: Terraform
 metadata:
-  name: hello-world2
+  name: hello-world3
   namespace: flux-system
 spec:
   path: ./hello-world

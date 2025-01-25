@@ -6,9 +6,6 @@ terraform {
     }
   }
 }
-provider "civo" {
-  region = "nyc1"
-}
 
 variable "cluster_name" {
   type    = string
@@ -30,6 +27,7 @@ variable "token" {
 
 provider "civo" {
   token = var.token
+  region = "nyc1"
 }
 
 resource "civo_network" "cluster" {

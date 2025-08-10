@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://charts.external-secrets.io
-    targetRevision: 0.19.1
+    targetRevision: 0.18.0
     helm:
       valuesObject:
         serviceAccount:

@@ -29,7 +29,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: external-dns-secret
-                key: api-token
+                key: token
   destination:
     name: in-cluster
     namespace: external-dns

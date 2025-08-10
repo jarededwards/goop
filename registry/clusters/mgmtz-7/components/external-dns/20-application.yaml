@@ -23,6 +23,7 @@ spec:
         sources:
           - ingress
         domainFilters:
+          - kuberocket.com
         env:
           - name: CF_API_TOKEN
             valueFrom:

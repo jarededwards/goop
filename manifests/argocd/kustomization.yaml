@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: argocd
+
+# To upgrade ArgoCD, increment the version here
+# https://github.com/argoproj/argo-cd/tags
+resources:
+  - github.com:argoproj/argo-cd.git/manifests/ha/cluster-install?ref=v3.0.12&timeout=90s
+  - argocd-namespace.yaml
+
+patches:
+  - path: argocd-cm.yaml
+    target:
+      kind: ConfigMap
+      name: argocd-cm
+  - path: argocd-cmd-params-cm.yaml
+    target:
+      kind: ConfigMap
+      name: argocd-cmd-params-cm
+  - path: argocd-rbac-cm.yaml
+    target:
+      kind: ConfigMap
+      name: argocd-rbac-cm
+
+generatorOptions:
+  disableNameSuffixHash: true

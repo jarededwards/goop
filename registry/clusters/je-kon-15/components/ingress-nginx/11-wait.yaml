@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ingress-nginx-wait
+  namespace: ingress-nginx
+  annotations:
+    argocd.argoproj.io/sync-wave: "51"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: ingress-nginx-wait
+  namespace: ingress-nginx
+  annotations:
+    argocd.argoproj.io/sync-wave: "51"
+rules:
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: ingress-nginx-wait
+  namespace: ingress-nginx
+  annotations:
+    argocd.argoproj.io/sync-wave: "51"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: ingress-nginx-wait
+subjects:
+  - kind: ServiceAccount
+    name: ingress-nginx-wait
+    namespace: ingress-nginx
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wait-ingress-nginx
+  namespace: ingress-nginx
+  annotations:
+    argocd.argoproj.io/sync-wave: "51"
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  ttlSecondsAfterFinished: 300
+  template:
+    spec:
+      serviceAccountName: ingress-nginx-wait
+      restartPolicy: OnFailure
+      containers:
+      - name: wait
+        image: bitnami/kubectl:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          echo "Waiting for all deployments in ingress-nginx namespace to be ready..."
+          kubectl wait --for=condition=available --all deployments -n ingress-nginx --timeout=600s
+          echo "All ingress-nginx deployments are ready!"

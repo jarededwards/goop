@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: external-secrets-wait
+  namespace: external-secrets
+  annotations:
+    argocd.argoproj.io/sync-wave: "11"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: external-secrets-wait
+  namespace: external-secrets
+  annotations:
+    argocd.argoproj.io/sync-wave: "11"
+rules:
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: external-secrets-wait
+  namespace: external-secrets
+  annotations:
+    argocd.argoproj.io/sync-wave: "11"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: external-secrets-wait
+subjects:
+  - kind: ServiceAccount
+    name: external-secrets-wait
+    namespace: external-secrets
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wait-external-secrets
+  namespace: external-secrets
+  annotations:
+    argocd.argoproj.io/sync-wave: "11"
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  ttlSecondsAfterFinished: 300
+  template:
+    spec:
+      serviceAccountName: external-secrets-wait
+      restartPolicy: OnFailure
+      containers:
+      - name: wait
+        image: bitnami/kubectl:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          echo "Waiting for all deployments in external-secrets namespace to be ready..."
+          kubectl wait --for=condition=available --all deployments -n external-secrets --timeout=600s
+          echo "All external-secrets deployments are ready!"
